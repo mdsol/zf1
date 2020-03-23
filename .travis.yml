@@ -18,7 +18,7 @@ install:
  - phpenv rehash
 
 services:
-  - memcached
+  - mysql
 
 before_script:
   - phpenv config-rm xdebug.ini || return 0
@@ -26,7 +26,6 @@ before_script:
   - if [[ "$TRAVIS_PHP_VERSION" != "5.2" ]]; then travis_retry composer install --no-interaction --prefer-source --dev; fi
   
   - mysql -e 'create database zftest;'
-  - psql -c 'create database zftest;' -U postgres
 
   - if [[ "$TRAVIS_PHP_VERSION" != "5.2" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]] && [[ "$TRAVIS_PHP_VERSION" != "7" ]]; then phpenv config-add tests/config.ini; fi
   - if [[ "$TRAVIS_PHP_VERSION" == "7" ]]; then phpenv config-add tests/php7_config.ini; fi

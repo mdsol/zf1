@@ -5,6 +5,13 @@ sudo: false
 php:
   - 7.2
 
+branches:
+  only:
+  - develop
+  - /^release.*$/
+  - master
+  - "/^travis\\//"
+
 env: TMPDIR=/tmp
 
 install:

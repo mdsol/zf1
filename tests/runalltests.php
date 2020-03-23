@@ -32,6 +32,10 @@ if (!$PHPUNIT) {
         }
     }
 
+    if (!$PHPUNIT) {
+        $PHPUNIT = '../vendor/phpunit/phpunit/composer/bin/phpunit';
+    }
+
     $PHPUNIT = trim($PHPUNIT);
     if (!$PHPUNIT) {
         echo "PHPUnit was not found on your OS!" . PHP_EOL;
@@ -58,7 +62,7 @@ sort($files);
 $result = 0;
 
 // run through phpunit
-while(list(, $file)=each($files)) {
+foreach ($files as $file) {
     if ($_SERVER['TRAVIS_PHP_VERSION'] == 'hhvm' && $file == 'Zend/CodeGenerator/AllTests.php') {
         echo "Skipping $file on HHVM" . PHP_EOL; //gets stuck on the HHVM
         continue;
